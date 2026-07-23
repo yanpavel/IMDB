@@ -19,9 +19,10 @@ func main() {
 	bloomFilter := bloom.New(10)
 	r := storage.NewRepository(*bloomFilter)
 	k := storage.Key{Id: 1500}
-	v := storage.Value{Name: "Joe"}
+	v := storage.Value{Measure: 123}
 	r.Add(k, v)
 	d := r.BloomFilter.Marshal()
 	r.BloomFilter.Unmarshal(d)
 	fmt.Print(r.BloomFilter)
+	r.Flush("storage")
 }
